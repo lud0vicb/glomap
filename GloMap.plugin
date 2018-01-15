@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<Plugin>
+  <Information>
+    <Name>GloMap</Name>
+    <Author>Glorom</Author>
+    <Version>2.0</Version>
+  </Information>
+  <Package>GloMap.GloMap.Main</Package>
+</Plugin>
