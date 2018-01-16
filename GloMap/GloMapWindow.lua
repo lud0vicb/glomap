@@ -1,5 +1,8 @@
--- version 3 avec des images TGA en jouant sur la transparence pour afficher uniquement une image de trajets
--- par dessus l'image de la carte
+-- version 3 with TGA image files 
+-- there is one TGA file containing the map and the names of town
+-- there are several TGA files ; each contains only lines to join town
+-- those lines are grouped by are ; example : Bree Nord, Moria
+-- a button allows to draw or hide travel of an area
 import "Turbine";
 import "Turbine.Gameplay";
 import "Turbine.UI";
@@ -7,12 +10,10 @@ import "Turbine.UI.Extensions";
 import "Turbine.UI.Lotro";
 
 GloMapWindow = class( Turbine.UI.Extensions.Window );
---GloMapWindow = class( Turbine.UI.Control);
 
 function GloMapWindow:Constructor()
 
 	Turbine.UI.Extensions.Window.Constructor( self );
-	--Turbine.UI.Control.Constructor( self );
 	
 	self:SetSize(1310, 950);
 	self:SetVisible (true);
@@ -20,16 +21,13 @@ function GloMapWindow:Constructor()
 	self:SetText ("Glorom's Map");
 	self:SetOpacity (1);
 	self:SetFadeSpeed (1);
-	--self:SetBackColor( Turbine.UI.Color(0, 0, 0, 0) );
-	--self:SetBackground ("GloMap/GloMap/Resources/GloMap.jpg");
-	--self:SetBackColorBlendMode( 1 );
 	self:SetStretchMode(1);
 	
 	self.MouseEnter = function( sender, args )
 		sender:SetOpacity( 1 );
 	end
 	self.MouseLeave = function( sender, args )
-		sender:SetOpacity( 0.4 );
+		sender:SetOpacity( 0.3 );
 	end
 	
 	self.KeyDown = function( sender, args )
@@ -49,10 +47,6 @@ function GloMapWindow:Constructor()
 		sender.dragStartY = args.Y;
 		sender.dragging = true;
 	end
-	--self.MouseClick = function( sender, args )
-        -- With each click, cycle through the various blend modes.
-     --   self:SetBlendMode( ( self:GetBlendMode() + 1 ) % 9 );
-    --end
 	local GloMap = self;
 	local mainWindow = self;
 	
@@ -70,39 +64,57 @@ function GloMapWindow:Constructor()
 	self.resizeHandle.MouseUp = function( sender, args )
 		sender.dragging = false;
 	end
-	-- carte generale
-	image = Turbine.UI.Control();
-	image:SetParent(self);
-	image:SetSize(1275, 840);
-	image:SetPosition (15,40);
-	image:SetBackground ("GloMap/GloMap/Resources/glomap.tga");
-	image:SetVisible(true);
-	image:SetStretchMode(1);
-	-- trajets bree nort
+	-- map + town names
+	map = Turbine.UI.Control();
+	map:SetParent(self);
+	map:SetSize(1275, 840);
+	map:SetPosition (15,40);
+	map:SetBackground ("GloMap/GloMap/Resources/glomap.tga");
+	map:SetVisible(true);
+	map:SetStretchMode(1);
+-- TRAVELS	
+	-- bree north
 	breeN = Turbine.UI.Control();
-	breeN:SetParent(image);
+	breeN:SetParent(map);
 	breeN:SetSize(1275, 840);
 	breeN:SetPosition (0,0);
 	breeN:SetBackground ("GloMap/GloMap/Resources/glomap-breenord.tga");
 	breeN:SetVisible(true);
 	breeN:SetStretchMode(1);
-	-- trajets bree sud
+	-- bree south
 	breeS = Turbine.UI.Control();
-	breeS:SetParent(image);
+	breeS:SetParent(map);
 	breeS:SetSize(1275, 840);
 	breeS:SetPosition (0,0);
 	breeS:SetBackground ("GloMap/GloMap/Resources/glomap-breesud.tga");
 	breeS:SetVisible(true);
 	breeS:SetStretchMode(1);
-	-- trajets moria
+	-- moria
 	moria = Turbine.UI.Control();
-	moria:SetParent(image);
+	moria:SetParent(map);
 	moria:SetSize(1275, 840);
 	moria:SetPosition (0,0);
 	moria:SetBackground ("GloMap/GloMap/Resources/glomap-moria.tga");
 	moria:SetVisible(true);
 	moria:SetStretchMode(1);
-	-- bouton pour trajets bree nord
+	-- eriador
+	eriador = Turbine.UI.Control();
+	eriador:SetParent(map);
+	eriador:SetSize(1275, 840);
+	eriador:SetPosition (0,0);
+	eriador:SetBackground ("GloMap/GloMap/Resources/glomap-eriador.tga");
+	eriador:SetVisible(true);
+	eriador:SetStretchMode(1);
+	-- rohan
+	rohan = Turbine.UI.Control();
+	rohan:SetParent(map);
+	rohan:SetSize(1275, 840);
+	rohan:SetPosition (0,0);
+	rohan:SetBackground ("GloMap/GloMap/Resources/glomap-rohan.tga");
+	rohan:SetVisible(true);
+	rohan:SetStretchMode(1);
+-- BUTTONS
+	-- bree north
 	btn1 = Turbine.UI.Button();
 	btn1:SetParent(self);
 	btn1:SetSize ( 100, 30 );
@@ -118,7 +130,7 @@ function GloMapWindow:Constructor()
 			breeN:SetVisible(true);
 		end
 	end
-	-- bouton pour trajet bree sud
+	-- bree south
 	btn2 = Turbine.UI.Button();
 	btn2:SetParent(self);
 	btn2:SetSize ( 100, 30 );
@@ -134,7 +146,7 @@ function GloMapWindow:Constructor()
 			breeS:SetVisible(true);
 		end
 	end
-	-- bouton pour trajet moria
+	-- moria
 	btn3 = Turbine.UI.Button();
 	btn3:SetParent(self);
 	btn3:SetSize ( 100, 30 );
@@ -150,6 +162,36 @@ function GloMapWindow:Constructor()
 			moria:SetVisible(true);
 		end
 	end
-
-	
+	-- eriador
+	btn4 = Turbine.UI.Button();
+	btn4:SetParent(self);
+	btn4:SetSize ( 100, 30 );
+	btn4:SetPosition ( 380, 900 );
+	btn4:SetVisible(true);
+	btn4:SetText ("Eriador");
+	btn4:SetBackColor ( Turbine.UI.Color (0,0,1));
+	btn4:SetTextAlignment( Turbine.UI.ContentAlignment.MiddleCenter );
+	btn4.MouseClick = function (sender, args)
+		if eriador:IsVisible() then
+			eriador:SetVisible(false);
+		else
+			eriador:SetVisible(true);
+		end
+	end
+	-- rohan
+	btn5 = Turbine.UI.Button();
+	btn5:SetParent(self);
+	btn5:SetSize ( 100, 30 );
+	btn5:SetPosition ( 500, 900 );
+	btn5:SetVisible(true);
+	btn5:SetText ("Rohan");
+	btn5:SetBackColor ( Turbine.UI.Color (0,0,1));
+	btn5:SetTextAlignment( Turbine.UI.ContentAlignment.MiddleCenter );
+	btn5.MouseClick = function (sender, args)
+		if rohan:IsVisible() then
+			rohan:SetVisible(false);
+		else
+			rohan:SetVisible(true);
+		end
+	end
 end
