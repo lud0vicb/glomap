@@ -7,18 +7,34 @@ import "Turbine.UI.Lotro";
 GloMapWindow = Turbine.UI.Extensions.Window() ;
 
 GloMapWindow:SetSize(1310, 950);
-GloMapWindow:SetVisible (true);
+GloMapWindow:SetVisible (false);
 GloMapWindow:SetPosition (500,0);
 GloMapWindow:SetText ("Glorom's Map");
 GloMapWindow:SetOpacity (1);
 GloMapWindow:SetFadeSpeed (1);
 GloMapWindow:SetStretchMode(1);
 
+GloMapWindow.Closed = function( sender, args )
+	btnM:SetBackground("GloMap/GloMap/Resources/redicon.jpg");
+	btnM:SetText("MAP\nON")
+end
 GloMapWindow.MouseEnter = function( sender, args )
 	sender:SetOpacity( 1 );
+	map:SetOpacity( 1 );
+	breeN:SetOpacity( 1 );
+	breeS:SetOpacity( 1 );
+	eriador:SetOpacity( 1 );
+	moria:SetOpacity( 1 );
+	rohan:SetOpacity( 1 );	
 end
 GloMapWindow.MouseLeave = function( sender, args )
 	sender:SetOpacity( 0.3 );
+	map:SetOpacity( 0.3 );
+	breeN:SetOpacity( 0.3 );
+	breeS:SetOpacity( 0.3 );
+	eriador:SetOpacity( 0.3 );
+	moria:SetOpacity( 0.3 );
+	rohan:SetOpacity( 0.3 );	
 end
 
 GloMapWindow.KeyDown = function( sender, args )
@@ -26,7 +42,7 @@ GloMapWindow.KeyDown = function( sender, args )
 		sender:SetVisible( false ) 
 	end
 end
-
+-- resize main window
 GloMapWindow.resizeHandle = Turbine.UI.Control();
 GloMapWindow.resizeHandle:SetParent( GloMapWindow );
 GloMapWindow.resizeHandle:SetZOrder( 100 );
@@ -112,13 +128,16 @@ btn1:SetSize ( 100, 30 );
 btn1:SetPosition ( 20, 900 );
 btn1:SetVisible(true);
 btn1:SetText ("Bree N");
-btn1:SetBackColor ( Turbine.UI.Color (0,0,1));
+btn1:SetBackColor ( Turbine.UI.Color (0,1,0));
+btn1:SetForeColor ( Turbine.UI.Color (0,0,0));
 btn1:SetTextAlignment( Turbine.UI.ContentAlignment.MiddleCenter );
 btn1.MouseClick = function (sender, args)
 	if breeN:IsVisible() then
 		breeN:SetVisible(false);
+		btn1:SetBackColor ( Turbine.UI.Color (1,0,0));
 	else
 		breeN:SetVisible(true);
+		btn1:SetBackColor ( Turbine.UI.Color (0,1,0));
 	end
 end
 -- bree south
@@ -128,13 +147,16 @@ btn2:SetSize ( 100, 30 );
 btn2:SetPosition ( 140, 900 );
 btn2:SetVisible(true);
 btn2:SetText ("Bree S");
-btn2:SetBackColor ( Turbine.UI.Color (0,0,1));
+btn2:SetBackColor ( Turbine.UI.Color (0,1,0));
+btn2:SetForeColor ( Turbine.UI.Color (0,0,0));
 btn2:SetTextAlignment( Turbine.UI.ContentAlignment.MiddleCenter );
 btn2.MouseClick = function (sender, args)
 	if breeS:IsVisible() then
 		breeS:SetVisible(false);
+		btn2:SetBackColor ( Turbine.UI.Color (1,0,0));
 	else
 		breeS:SetVisible(true);
+		btn2:SetBackColor ( Turbine.UI.Color (0,1,0));
 	end
 end
 -- moria
@@ -144,13 +166,16 @@ btn3:SetSize ( 100, 30 );
 btn3:SetPosition ( 260, 900 );
 btn3:SetVisible(true);
 btn3:SetText ("Moria");
-btn3:SetBackColor ( Turbine.UI.Color (0,0,1));
+btn3:SetBackColor ( Turbine.UI.Color (0,1,0));
+btn3:SetForeColor ( Turbine.UI.Color (0,0,0));
 btn3:SetTextAlignment( Turbine.UI.ContentAlignment.MiddleCenter );
 btn3.MouseClick = function (sender, args)
 	if moria:IsVisible() then
+		btn3:SetBackColor ( Turbine.UI.Color (1,0,0));
 		moria:SetVisible(false);
 	else
 		moria:SetVisible(true);
+		btn3:SetBackColor ( Turbine.UI.Color (0,1,0));
 	end
 end
 -- eriador
@@ -160,13 +185,16 @@ btn4:SetSize ( 100, 30 );
 btn4:SetPosition ( 380, 900 );
 btn4:SetVisible(true);
 btn4:SetText ("Eriador");
-btn4:SetBackColor ( Turbine.UI.Color (0,0,1));
+btn4:SetBackColor ( Turbine.UI.Color (0,1,0));
+btn4:SetForeColor ( Turbine.UI.Color (0,0,0));
 btn4:SetTextAlignment( Turbine.UI.ContentAlignment.MiddleCenter );
 btn4.MouseClick = function (sender, args)
 	if eriador:IsVisible() then
+		btn4:SetBackColor ( Turbine.UI.Color (1,0,0));
 		eriador:SetVisible(false);
 	else
 		eriador:SetVisible(true);
+		btn4:SetBackColor ( Turbine.UI.Color (0,1,0));
 	end
 end
 -- rohan
@@ -176,13 +204,17 @@ btn5:SetSize ( 100, 30 );
 btn5:SetPosition ( 500, 900 );
 btn5:SetVisible(true);
 btn5:SetText ("Rohan");
-btn5:SetBackColor ( Turbine.UI.Color (0,0,1));
+btn5:SetBackColor ( Turbine.UI.Color (0,1,0));
+btn5:SetForeColor ( Turbine.UI.Color (0,0,0));
 btn5:SetTextAlignment( Turbine.UI.ContentAlignment.MiddleCenter );
 btn5.MouseClick = function (sender, args)
 	if rohan:IsVisible() then
+		btn5:SetBackColor ( Turbine.UI.Color (1,0,0));
+
 		rohan:SetVisible(false);
 	else
 		rohan:SetVisible(true);
+		btn5:SetBackColor ( Turbine.UI.Color (0,1,0));
 	end
 end
 

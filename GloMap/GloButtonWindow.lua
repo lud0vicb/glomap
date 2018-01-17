@@ -1,30 +1,43 @@
 import "Turbine";
 import "Turbine.Gameplay";
 import "Turbine.UI";
-import "Turbine.UI.Extensions";
-import "Turbine.UI.Lotro";
 
-GloButton = Turbine.UI.Control();
+GloButton = Turbine.UI.Lotro.Window();
 
-GloButton:SetSize(500, 200);
+GloButton:SetSize(40, 40);
 GloButton:SetVisible (true);
 GloButton:SetPosition (0,0);
---GloButton:SetText ("GloMap");
 GloButton:SetOpacity (1);
-GloButton:SetBackColor("blue");
+GloButton:SetText ("Glo");
+GloButton.Closed = function (sender, args)
+	GloButton:SetVisible (true);
+end
+GloButton.MouseEnter = function( sender, args )
+	sender:SetOpacity( 1 );
+end
+GloButton.MouseLeave = function( sender, args )
+	sender:SetOpacity( 0.3 );
+end
+
 
 btnM = Turbine.UI.Button();
 btnM:SetParent(GloButton);
-btnM:SetSize (50,30);
-btnM:SetPosition (30,30);
+btnM:SetSize (40,40);
+btnM:SetPosition (20,35);
 btnM:SetVisible(true);
-btnM:SetText ("GloMap");
-btnM:SetBackColor ( Turbine.UI.Color (0,0,1));
+btnM:SetBackground("GloMap/GloMap/Resources/redicon.jpg");
+btnM:SetText("MAP\nON")
+--btnM:SetBackColor ( "grey");
 btnM:SetTextAlignment( Turbine.UI.ContentAlignment.MiddleCenter );
 btnM.MouseClick = function (sender, args)
-	if GloMap:IsVisible() then
-		GloMap:SetVisible (false);
+	if GloMapWindow:IsVisible() then
+		GloMapWindow:SetVisible (false);
+		btnM:SetBackground("GloMap/GloMap/Resources/redicon.jpg");
+		btnM:SetText("MAP\nON")
 	else
-		GloMap:SetVisible (true);
+		GloMapWindow:SetVisible (true);
+		btnM:SetBackground("GloMap/GloMap/Resources/greenicon.jpg");
+		btnM:SetText("MAP\nOFF")
 	end
 end
+
