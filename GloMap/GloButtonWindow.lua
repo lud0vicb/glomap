@@ -5,23 +5,14 @@ import "Turbine.UI";
 GloSaveData = {x=0;y=0;};
 GloData = Turbine.PluginData.Load(Turbine.DataScope.Account, "Glorom", function()
 end);
+Turbine.Shell.WriteLine (GloData);
 if (GloData) then
-	DeepTableCopy(GloData, GloSaveData);
+	GloSaveData.x = GloData.x;
+	GloSaveData.y = GloData.y;
 	Turbine.Shell.WriteLine("GloLoad done");
 else
 	Turbine.Shell.WriteLine("GloButtonWindow initialized (0,0)");
 end
---[[
-Turbine.PluginData.Load(Turbine.DataScope.Account, "Glorom", function(GloData)
-	if (GloData) then
-		GloData = ImportTable(GloData);
-		DeepTableCopy(GloData, GloSaveData);
-		Turbine.Shell.WriteLine("GloLoad done");
-	else
-		Turbine.Shell.WriteLine("GloButtonWindow initialized (0,0)");
-	end
-end);
-]]
 -- movable windows to hold buttons
 GloButtonWindow = Turbine.UI.Lotro.Window();
 GloButtonWindow:SetSize(40, 40);
@@ -61,7 +52,6 @@ end
 -- save config when the plugin stops
 function GloSave()
     GloSaveData.x,GloSaveData.y = GloButtonWindow:GetPosition();
-	--local tmpData = ExportTable(GloSaveData);    
     Turbine.PluginData.Save(Turbine.DataScope.Account, "Glorom", GloSaveData, function()
 		Turbine.Shell.WriteLine("GloSave done");
     end);
