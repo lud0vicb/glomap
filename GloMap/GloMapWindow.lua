@@ -3,17 +3,12 @@ import "Turbine.Gameplay";
 import "Turbine.UI";
 import "Turbine.UI.Extensions";
 import "Turbine.UI.Lotro";
+import "GloMap.GloMap.GloWindow"
 
-GloMapWindow = Turbine.UI.Extensions.Window() ;
+GloMapWindow = GloWindow() ;
 
 GloMapWindow:SetSize(1310, 950);
-GloMapWindow:SetVisible (false);
-GloMapWindow:SetPosition (500,0);
 GloMapWindow:SetText ("Glorom's Map");
-GloMapWindow:SetOpacity (1);
-GloMapWindow:SetFadeSpeed (1);
-GloMapWindow:SetStretchMode(1);
-
 GloMapWindow.Closed = function( sender, args )
 	btnM:SetBackground("GloMap/GloMap/Resources/redicon.jpg");
 	btnM:SetText("MAP\nON")
@@ -35,41 +30,6 @@ GloMapWindow.MouseLeave = function( sender, args )
 	eriador:SetOpacity( 0.3 );
 	moria:SetOpacity( 0.3 );
 	rohan:SetOpacity( 0.3 );	
-end
-
-GloMapWindow.KeyDown = function( sender, args )
-	if ( args.Action == Turbine.UI.Lotro.Action.Escape ) then
-		sender:SetVisible( false ) 
-	end
-end
--- resize main window
-GloMapWindow.resizeHandle = Turbine.UI.Control();
-GloMapWindow.resizeHandle:SetParent( GloMapWindow );
-GloMapWindow.resizeHandle:SetZOrder( 100 );
-GloMapWindow.resizeHandle:SetSize( 20, 20 );
-GloMapWindow.resizeHandle:SetPosition( GloMapWindow:GetWidth() - GloMapWindow.resizeHandle:GetWidth(), GloMapWindow:GetHeight() - GloMapWindow.resizeHandle:GetHeight() );
-
-GloMapWindow.resizeHandle.MouseDown = function( sender, args )
-	sender.dragStartX = args.X;
-	sender.dragStartY = args.Y;
-	sender.dragging = true;
-end
-local GloMap = GloMapWindow;
-local mainWindow = GloMapWindow;
-
-GloMapWindow.resizeHandle.MouseMove = function( sender, args )
-	local width = mainWindow:GetWidth();
-	local height = mainWindow:GetHeight();
-
-	if ( sender.dragging ) then
-		mainWindow:SetSize( width + ( args.X - sender.dragStartX ), height + ( args.Y - sender.dragStartY ) );
-		sender:SetPosition( mainWindow:GetWidth() - sender:GetWidth(), mainWindow:GetHeight() - sender:GetHeight() )
-		GloMap:PerformLayout()
-	end
-end
-
-GloMapWindow.resizeHandle.MouseUp = function( sender, args )
-	sender.dragging = false;
 end
 -- map + town names
 map = Turbine.UI.Control();
@@ -217,25 +177,3 @@ btn5.MouseClick = function (sender, args)
 		btn5:SetBackColor ( Turbine.UI.Color (0,1,0));
 	end
 end
-
-GloMapCommand = Turbine.ShellCommand();
-function GloMapCommand:Execute( command, arguments )
-	if ( arguments == "show" ) then
-		GloMapWindow:SetVisible( true );
-	elseif ( arguments == "hide" ) then
-		GloMapWindow:SetVisible( false );
-	elseif ( arguments ~= nil ) then
-		local opacity = tonumber( arguments )
-		if ( ( opacity ~= nil ) and ( opacity > 0 ) ) then
-			GloMapWindow:SetOpacity( opacity );
-		end
-	end
-end
-
-function GloMapCommand:GetHelp()
-	return "Affiche une fenetre des trajets rapide en monture en Eriador";
-end
-Turbine.Shell.AddCommand( "glo;glomap", GloMapCommand );
-listCommandsCommand = Turbine.ShellCommand();
-
-
