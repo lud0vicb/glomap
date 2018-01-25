@@ -9,10 +9,11 @@ GloWindow = class( Turbine.UI.Extensions.Window );
 function GloWindow:Constructor()
 	Turbine.UI.Extensions.Window.Constructor( self );
 	self:SetVisible (false);
+	self:SetSize (10,10);
 	self:SetPosition (500,0);
 	self:SetOpacity (1);
 	self:SetFadeSpeed (1);
-	self:SetStretchMode(1);
+	--self:SetStretchMode(1);
 
 	self.MouseEnter = function( sender, args )
 		sender:SetOpacity( 1 );

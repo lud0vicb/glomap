@@ -8,7 +8,7 @@ import "GloMap.GloMap.GloWindow"
 GloMapWindow = GloWindow() ;
 
 GloMapWindow:SetSize(1310, 950);
-GloMapWindow:SetText ("Glorom's Map");
+GloMapWindow:SetText ("Trajets");
 GloMapWindow.Closed = function( sender, args )
 	btnM:SetBackground("GloMap/GloMap/Resources/redicon.jpg");
 	btnM:SetText("MAP\nON")

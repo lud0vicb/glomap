@@ -49,6 +49,26 @@ btnM.MouseClick = function (sender, args)
 		btnM:SetText("MAP\nOFF")
 	end
 end
+-- button to hide/show main map : GloMapWindow
+btnMI = Turbine.UI.Button();
+btnMI:SetParent(GloButtonWindow);
+btnMI:SetSize (40,40);
+btnMI:SetPosition (60,35);
+btnMI:SetVisible(true);
+btnMI:SetBackground("GloMap/GloMap/Resources/redicon.jpg");
+btnMI:SetText("MI\nON")
+btnMI:SetTextAlignment( Turbine.UI.ContentAlignment.MiddleCenter );
+btnMI.MouseClick = function (sender, args)
+	if GloMIWindow:IsVisible() then
+		GloMIWindow:SetVisible (false);
+		btnMI:SetBackground("GloMap/GloMap/Resources/redicon.jpg");
+		btnMI:SetText("MI\nON")
+	else
+		GloMIWindow:SetVisible (true);
+		btnMI:SetBackground("GloMap/GloMap/Resources/greenicon.jpg");
+		btnMI:SetText("MI\nOFF")
+	end
+end
 -- save config when the plugin stops
 function GloSave()
     GloSaveData.x,GloSaveData.y = GloButtonWindow:GetPosition();

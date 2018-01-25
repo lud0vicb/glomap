@@ -3,7 +3,7 @@
   <Information>
     <Name>GloMap</Name>
     <Author>Glorom</Author>
-    <Version>3.0</Version>
+    <Version>3.1</Version>
   </Information>
   <Package>GloMap.GloMap.Main</Package>
 </Plugin>
