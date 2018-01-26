@@ -4,7 +4,6 @@ import "Turbine.UI";
 import "Turbine.UI.Extensions";
 import "Turbine.UI.Lotro";
 import "GloMap.GloMap.GloWindow"
-import "GloMap.GloMap.GloButton"
 
 GloMIWindow = GloWindow() ;
 
