@@ -4,6 +4,7 @@ import "Turbine.UI";
 import "Turbine.UI.Extensions";
 import "Turbine.UI.Lotro";
 import "GloMap.GloMap.GloWindow"
+import "GloMap.GloMap.GloButton"
 
 GloMIWindow = GloWindow() ;
 
@@ -38,32 +39,39 @@ label:SetForeColor( Turbine.UI.Color( 1, 1, 1 ) );
 label:SetText( "Maps from http://lotro-wiki.fr" );
 label:SetTextAlignment( Turbine.UI.ContentAlignment.MiddleCenter );
 
-btnMI1 = Turbine.UI.Button();
-btnMI1:SetParent(GloMIWindow);
-btnMI1:SetSize ( 100, 20 );
-btnMI1:SetPosition ( 20, 530 );
-btnMI1:SetVisible(true);
-btnMI1:SetText ("Angmar");
-btnMI1:SetBackColor ( Turbine.UI.Color (0,1,0));
-btnMI1:SetForeColor ( Turbine.UI.Color (0,0,0));
-btnMI1:SetTextAlignment( Turbine.UI.ContentAlignment.MiddleCenter );
-btnMI1.MouseClick = function (sender, args)
-	mapMI:SetBackground ("GloMap/GloMap/Resources/Angmar.jpg");
-	btnMI1:SetBackColor ( Turbine.UI.Color (0,1,0));
-	btnMI2:SetBackColor ( Turbine.UI.Color (1,0,0));
+GloButton = class( Turbine.UI.Button );	
+
+function GloButton:Constructor(parent, sx, sy, px, py, titre, file)
+	Turbine.UI.Button.Constructor( self );
+	self:SetParent(parent);
+	self:SetSize ( sx, sy );
+	self:SetPosition ( px, py );
+	self:SetVisible(true);
+	self:SetText (titre);
+	self:SetBackColor ( Turbine.UI.Color (0,1,0));
+	self:SetForeColor ( Turbine.UI.Color (0,0,0));
+	self:SetTextAlignment( Turbine.UI.ContentAlignment.MiddleCenter );
+	self.MouseClick = function (sender, args)
+		mapMI:SetBackground (file);
+		btnMI1:SetBackColor ( Turbine.UI.Color (1,0,0));
+		btnMI2:SetBackColor ( Turbine.UI.Color (1,0,0));
+		btnMI3:SetBackColor ( Turbine.UI.Color (1,0,0));
+		btnMI4:SetBackColor ( Turbine.UI.Color (1,0,0));
+		btnMI5:SetBackColor ( Turbine.UI.Color (1,0,0));
+		btnMI6:SetBackColor ( Turbine.UI.Color (1,0,0));
+		btnMI7:SetBackColor ( Turbine.UI.Color (1,0,0));
+		btnMI8:SetBackColor ( Turbine.UI.Color (1,0,0));
+		btnMI9:SetBackColor ( Turbine.UI.Color (1,0,0));
+		self:SetBackColor ( Turbine.UI.Color (0,1,0));
+	end
 end
 
-btnMI2 = Turbine.UI.Button();
-btnMI2:SetParent(GloMIWindow);
-btnMI2:SetSize ( 100, 20 );
-btnMI2:SetPosition ( 140, 530 );
-btnMI2:SetVisible(true);
-btnMI2:SetText ("Evendim");
-btnMI2:SetBackColor ( Turbine.UI.Color (1,0,0));
-btnMI2:SetForeColor ( Turbine.UI.Color (0,0,0));
-btnMI2:SetTextAlignment( Turbine.UI.ContentAlignment.MiddleCenter );
-btnMI2.MouseClick = function (sender, args)
-	mapMI:SetBackground ("GloMap/GloMap/Resources/Evendim.jpg");
-	btnMI1:SetBackColor ( Turbine.UI.Color (1,0,0));
-	btnMI2:SetBackColor ( Turbine.UI.Color (0,1,0));
-end
+btnMI1 = GloButton(GloMIWindow,100,20,20,530,"Angmar","GloMap/GloMap/Resources/Angmar.jpg");
+btnMI2 = GloButton(GloMIWindow,100,20,140,530,"Evendim","GloMap/GloMap/Resources/Evendim.jpg");
+btnMI3 = GloButton(GloMIWindow,100,20,260,530,"Forochel", "GloMap/GloMap/Resources/forochel.jpg");
+btnMI4 = GloButton(GloMIWindow,100,20,380,530,"Gondor centre", "GloMap/GloMap/Resources/gondorcentre.jpg");
+btnMI5 = GloButton(GloMIWindow,100,20,500,530,"Gondor centre", "GloMap/GloMap/Resources/gondorouest.jpg");
+btnMI6 = GloButton(GloMIWindow,100,20,20,560,"Hauts du nord","GloMap/GloMap/Resources/hautsdunord.jpg");
+btnMI7 = GloButton(GloMIWindow,100,20,140,560,"Ithilien sud","GloMap/GloMap/Resources/ithiliensud.jpg");
+btnMI8 = GloButton(GloMIWindow,100,20,260,560,"Mont brumeux","GloMap/GloMap/Resources/montsbrumeux.jpg");
+btnMI9 = GloButton(GloMIWindow,100,20,380,560,"Forêt noire","GloMap/GloMap/Resources/foretnoire.jpg");

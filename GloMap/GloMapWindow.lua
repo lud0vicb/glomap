@@ -81,99 +81,30 @@ rohan:SetBackground ("GloMap/GloMap/Resources/glomap-rohan.tga");
 rohan:SetVisible(true);
 rohan:SetStretchMode(1);
 -- BUTTONS
--- bree north
-btn1 = Turbine.UI.Button();
-btn1:SetParent(GloMapWindow);
-btn1:SetSize ( 100, 30 );
-btn1:SetPosition ( 20, 900 );
-btn1:SetVisible(true);
-btn1:SetText ("Bree N");
-btn1:SetBackColor ( Turbine.UI.Color (0,1,0));
-btn1:SetForeColor ( Turbine.UI.Color (0,0,0));
-btn1:SetTextAlignment( Turbine.UI.ContentAlignment.MiddleCenter );
-btn1.MouseClick = function (sender, args)
-	if breeN:IsVisible() then
-		breeN:SetVisible(false);
-		btn1:SetBackColor ( Turbine.UI.Color (1,0,0));
-	else
-		breeN:SetVisible(true);
-		btn1:SetBackColor ( Turbine.UI.Color (0,1,0));
-	end
-end
--- bree south
-btn2 = Turbine.UI.Button();
-btn2:SetParent(GloMapWindow);
-btn2:SetSize ( 100, 30 );
-btn2:SetPosition ( 140, 900 );
-btn2:SetVisible(true);
-btn2:SetText ("Bree S");
-btn2:SetBackColor ( Turbine.UI.Color (0,1,0));
-btn2:SetForeColor ( Turbine.UI.Color (0,0,0));
-btn2:SetTextAlignment( Turbine.UI.ContentAlignment.MiddleCenter );
-btn2.MouseClick = function (sender, args)
-	if breeS:IsVisible() then
-		breeS:SetVisible(false);
-		btn2:SetBackColor ( Turbine.UI.Color (1,0,0));
-	else
-		breeS:SetVisible(true);
-		btn2:SetBackColor ( Turbine.UI.Color (0,1,0));
-	end
-end
--- moria
-btn3 = Turbine.UI.Button();
-btn3:SetParent(GloMapWindow);
-btn3:SetSize ( 100, 30 );
-btn3:SetPosition ( 260, 900 );
-btn3:SetVisible(true);
-btn3:SetText ("Moria");
-btn3:SetBackColor ( Turbine.UI.Color (0,1,0));
-btn3:SetForeColor ( Turbine.UI.Color (0,0,0));
-btn3:SetTextAlignment( Turbine.UI.ContentAlignment.MiddleCenter );
-btn3.MouseClick = function (sender, args)
-	if moria:IsVisible() then
-		btn3:SetBackColor ( Turbine.UI.Color (1,0,0));
-		moria:SetVisible(false);
-	else
-		moria:SetVisible(true);
-		btn3:SetBackColor ( Turbine.UI.Color (0,1,0));
-	end
-end
--- eriador
-btn4 = Turbine.UI.Button();
-btn4:SetParent(GloMapWindow);
-btn4:SetSize ( 100, 30 );
-btn4:SetPosition ( 380, 900 );
-btn4:SetVisible(true);
-btn4:SetText ("Eriador");
-btn4:SetBackColor ( Turbine.UI.Color (0,1,0));
-btn4:SetForeColor ( Turbine.UI.Color (0,0,0));
-btn4:SetTextAlignment( Turbine.UI.ContentAlignment.MiddleCenter );
-btn4.MouseClick = function (sender, args)
-	if eriador:IsVisible() then
-		btn4:SetBackColor ( Turbine.UI.Color (1,0,0));
-		eriador:SetVisible(false);
-	else
-		eriador:SetVisible(true);
-		btn4:SetBackColor ( Turbine.UI.Color (0,1,0));
-	end
-end
--- rohan
-btn5 = Turbine.UI.Button();
-btn5:SetParent(GloMapWindow);
-btn5:SetSize ( 100, 30 );
-btn5:SetPosition ( 500, 900 );
-btn5:SetVisible(true);
-btn5:SetText ("Rohan");
-btn5:SetBackColor ( Turbine.UI.Color (0,1,0));
-btn5:SetForeColor ( Turbine.UI.Color (0,0,0));
-btn5:SetTextAlignment( Turbine.UI.ContentAlignment.MiddleCenter );
-btn5.MouseClick = function (sender, args)
-	if rohan:IsVisible() then
-		btn5:SetBackColor ( Turbine.UI.Color (1,0,0));
+GloMapButton = class( Turbine.UI.Button );	
 
-		rohan:SetVisible(false);
-	else
-		rohan:SetVisible(true);
-		btn5:SetBackColor ( Turbine.UI.Color (0,1,0));
+function GloMapButton:Constructor(parent, sx, sy, px, py, titre, trajets)
+	Turbine.UI.Button.Constructor( self );
+	self:SetParent(parent);
+	self:SetSize ( sx, sy );
+	self:SetPosition ( px, py );
+	self:SetVisible(true);
+	self:SetText (titre);
+	self:SetBackColor ( Turbine.UI.Color (0,1,0));
+	self:SetForeColor ( Turbine.UI.Color (0,0,0));
+	self:SetTextAlignment( Turbine.UI.ContentAlignment.MiddleCenter );
+	self.MouseClick = function (sender, args)
+		if trajets:IsVisible() then
+			trajets:SetVisible(false);
+			self:SetBackColor ( Turbine.UI.Color (1,0,0));
+		else
+			trajets:SetVisible(true);
+			self:SetBackColor ( Turbine.UI.Color (0,1,0));
+		end
 	end
 end
+btn1 = GloMapButton(GloMapWindow,100,30,20,900,"Bree N",breeN);
+btn2 = GloMapButton(GloMapWindow,100,30,140,900,"Bree S",breeS);
+btn3 = GloMapButton(GloMapWindow,100,30,260,900,"Moria",moria);
+btn4 = GloMapButton(GloMapWindow,100,30,380,900,"Eriador",eriador);
+btn5 = GloMapButton(GloMapWindow,100,30,500,900,"Rohan",rohan);
