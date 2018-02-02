@@ -4,8 +4,9 @@ import "Turbine.UI";
 import "Turbine.UI.Extensions";
 import "Turbine.UI.Lotro";
 import "GloMap.GloMap.GloWindow"
+import "GloMap.GloMap.GloWindow"
 
-GloMIWindow = GloWindow() ;
+GloMIWindow = GloWindow(GloSaveData.xMI,GloSaveData.yMI) ;
 
 GloMIWindow:SetSize(680, 620);
 GloMIWindow:SetText ("Menaces itinérantes");

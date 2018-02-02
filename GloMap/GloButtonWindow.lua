@@ -1,24 +1,12 @@
 import "Turbine";
 import "Turbine.Gameplay";
 import "Turbine.UI";
--- load config or init if no saved config found
-GloSaveData = {x=0;y=0;};
-GloData = Turbine.PluginData.Load(Turbine.DataScope.Account, "Glorom", function()
-end);
-Turbine.Shell.WriteLine (GloData);
-if (GloData) then
-	GloSaveData.x = GloData.x;
-	GloSaveData.y = GloData.y;
-	Turbine.Shell.WriteLine("GloLoad done");
-else
-	Turbine.Shell.WriteLine("GloButtonWindow initialized (0,0)");
-end
 -- movable windows to hold buttons
 GloButtonWindow = Turbine.UI.Lotro.Window();
 GloButtonWindow:SetSize(40, 40);
 GloButtonWindow:SetVisible (true);
 GloButtonWindow:SetPosition (GloSaveData.x,GloSaveData.y);
-GloButtonWindow:SetOpacity (1);
+GloButtonWindow:SetOpacity (0.3);
 GloButtonWindow:SetText ("Glo");
 GloButtonWindow.Closed = function (sender, args)
 	GloButtonWindow:SetVisible (true);
@@ -69,11 +57,3 @@ btnMI.MouseClick = function (sender, args)
 		btnMI:SetText("MI\nOFF")
 	end
 end
--- save config when the plugin stops
-function GloSave()
-    GloSaveData.x,GloSaveData.y = GloButtonWindow:GetPosition();
-    Turbine.PluginData.Save(Turbine.DataScope.Account, "Glorom", GloSaveData, function()
-		Turbine.Shell.WriteLine("GloSave done");
-    end);
-end
-Turbine.Plugin.Unload = GloSave;

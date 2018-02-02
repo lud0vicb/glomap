@@ -5,7 +5,7 @@ import "Turbine.UI.Extensions";
 import "Turbine.UI.Lotro";
 import "GloMap.GloMap.GloWindow"
 
-GloMapWindow = GloWindow() ;
+GloMapWindow = GloWindow(GloSaveData.xM,GloSaveData.yM) ;
 
 GloMapWindow:SetSize(1310, 950);
 GloMapWindow:SetText ("Trajets");
