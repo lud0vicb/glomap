@@ -26,9 +26,10 @@ mapMI = Turbine.UI.Control();
 mapMI:SetParent(GloMIWindow);
 mapMI:SetSize(640, 480);
 mapMI:SetPosition (15,40);
-mapMI:SetBackground ("GloMap/GloMap/Resources/angmar.jpg");
+mapMI:SetBackground ("GloMap/GloMap/Resources/glomapMIpetit.jpg");
 mapMI:SetVisible(true);
 mapMI:SetStretchMode(1);
+--mapMI:SetZOrder(2);
 
 label = Turbine.UI.Label();
 label:SetParent( GloMIWindow );
@@ -48,30 +49,24 @@ function GloButton:Constructor(parent, sx, sy, px, py, titre, file)
 	self:SetPosition ( px, py );
 	self:SetVisible(true);
 	self:SetText (titre);
-	self:SetBackColor ( Turbine.UI.Color (0,1,0));
-	self:SetForeColor ( Turbine.UI.Color (0,0,0));
+	self:SetBackColor ( Turbine.UI.Color (0,1,0,0));
+	self:SetForeColor ( Turbine.UI.Color (0,0,0,0));
 	self:SetTextAlignment( Turbine.UI.ContentAlignment.MiddleCenter );
+	--self:SetZOrder(1000);
 	self.MouseClick = function (sender, args)
 		mapMI:SetBackground (file);
-		btnMI1:SetBackColor ( Turbine.UI.Color (1,0,0));
-		btnMI2:SetBackColor ( Turbine.UI.Color (1,0,0));
-		btnMI3:SetBackColor ( Turbine.UI.Color (1,0,0));
-		btnMI4:SetBackColor ( Turbine.UI.Color (1,0,0));
-		btnMI5:SetBackColor ( Turbine.UI.Color (1,0,0));
-		btnMI6:SetBackColor ( Turbine.UI.Color (1,0,0));
-		btnMI7:SetBackColor ( Turbine.UI.Color (1,0,0));
-		btnMI8:SetBackColor ( Turbine.UI.Color (1,0,0));
-		btnMI9:SetBackColor ( Turbine.UI.Color (1,0,0));
-		self:SetBackColor ( Turbine.UI.Color (0,1,0));
 	end
 end
 
-btnMI1 = GloButton(GloMIWindow,100,20,20,530,"Angmar","GloMap/GloMap/Resources/Angmar.jpg");
-btnMI2 = GloButton(GloMIWindow,100,20,140,530,"Evendim","GloMap/GloMap/Resources/Evendim.jpg");
-btnMI3 = GloButton(GloMIWindow,100,20,260,530,"Forochel", "GloMap/GloMap/Resources/forochel.jpg");
-btnMI4 = GloButton(GloMIWindow,100,20,380,530,"Gondor centre", "GloMap/GloMap/Resources/gondorcentre.jpg");
-btnMI5 = GloButton(GloMIWindow,100,20,500,530,"Gondor centre", "GloMap/GloMap/Resources/gondorouest.jpg");
-btnMI6 = GloButton(GloMIWindow,100,20,20,560,"Hauts du nord","GloMap/GloMap/Resources/hautsdunord.jpg");
-btnMI7 = GloButton(GloMIWindow,100,20,140,560,"Ithilien sud","GloMap/GloMap/Resources/ithiliensud.jpg");
-btnMI8 = GloButton(GloMIWindow,100,20,260,560,"Mont brumeux","GloMap/GloMap/Resources/montsbrumeux.jpg");
-btnMI9 = GloButton(GloMIWindow,100,20,380,560,"Forêt noire","GloMap/GloMap/Resources/foretnoire.jpg");
+btnMI1 = GloButton(GloMIWindow,50,20,310,85,"Angmar","GloMap/GloMap/Resources/Angmar.jpg");
+btnMI2 = GloButton(GloMIWindow,55,20,135,115,"Evendim","GloMap/GloMap/Resources/Evendim.jpg");
+btnMI3 = GloButton(GloMIWindow,60,20,200,70,"Forochel", "GloMap/GloMap/Resources/forochel.jpg");
+btnMI4 = GloButton(GloMIWindow,60,30,420,480,"Gondor centre", "GloMap/GloMap/Resources/gondorcentre.jpg");
+btnMI5 = GloButton(GloMIWindow,60,30,340,415,"Gondor ouest", "GloMap/GloMap/Resources/gondorouest.jpg");
+btnMI6 = GloButton(GloMIWindow,55,30,280,125,"Hauts du nord","GloMap/GloMap/Resources/hautsdunord.jpg");
+btnMI7 = GloButton(GloMIWindow,60,30,530,465,"Ithilien sud","GloMap/GloMap/Resources/ithiliensud.jpg");
+btnMI8 = GloButton(GloMIWindow,55,30,340,120,"Mont brumeux","GloMap/GloMap/Resources/montsbrumeux.jpg");
+btnMI9 = GloButton(GloMIWindow,50,30,480,200,"Forêt noire","GloMap/GloMap/Resources/foretnoire.jpg");
+btnMIA = GloButton(GloMIWindow,100,20,300,530,"Monde","GloMap/GloMap/Resources/glomapMIpetit.jpg");
+btnMIA:SetBackColor ( Turbine.UI.Color (1,1,1));
+btnMIA:SetForeColor ( Turbine.UI.Color (0,0,0));
